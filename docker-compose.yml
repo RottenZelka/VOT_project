@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Map local port 3000 to container port 80
+    environment:
+      - NODE_ENV=development
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001" # Map local port 3001 to container port 3001
+    depends_on:
+      - mariadb
+    volumes:
+      - ./backend:/usr/src/app
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_DATABASE=mydatabase
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+volumes:
+  mariadb-data:
