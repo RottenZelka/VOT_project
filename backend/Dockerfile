@@ -2,7 +2,7 @@
 FROM node:14
 
 # Create and set the working directory
-WORKDIR /app/backend/routes
+WORKDIR /routes
 
 # Copy package.json and package-lock.json
 COPY package.json ./
