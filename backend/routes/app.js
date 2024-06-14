@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const pool = require('./db');
-const { hashPassword, verifyPassword } = require('./passwordUtils');
+const pool = require('../db/db');
+const { hashPassword, verifyPassword } = require('../utils/passwordUtils');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 
