@@ -3,9 +3,10 @@ version: '3'
 services:
   frontend:
     build:
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000" # Map local port 3000 to container port 80
+      - "3000:3000"
     environment:
       - NODE_ENV=development
 
@@ -15,20 +16,35 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001" # Map local port 3001 to container port 3001
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mariadb
+      - DB_PORT=3307
+      - DB_USER=root
+      - DB_PASSWORD=admin
+      - DB_NAME=one_id
     depends_on:
-      - mariadb
-    volumes:
-      - ./backend:/usr/src/app
+      - mariadb1
 
-  mariadb:
+  mariadb1:
     image: mariadb:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=example
-      - MYSQL_DATABASE=mydatabase
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=one_id
     ports:
-      - "3306:3306"
+      - "3307:3306" # Change this line
     volumes:
       - mariadb-data:/var/lib/mysql
+
+  #mariadb2:
+    #image: mariadb:latest
+    #environment:
+      #- MYSQL_ROOT_PASSWORD=admin
+     # - MYSQL_DATABASE=one_id
+    #ports:
+   #   - "3307:3307" # Change this line
+  #  volumes:
+ #     - mariadb-data:/var/lib/mysql
 
 volumes:
   mariadb-data:
