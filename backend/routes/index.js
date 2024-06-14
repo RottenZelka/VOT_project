@@ -5,8 +5,22 @@ const pool = require('../db/db');
 const { hashPassword, verifyPassword } = require('../utils/passwordUtils');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const session = require('express-session');
+const Keycloak = require('keycloak-connect');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+// Keycloak configuration
+const keycloak = new Keycloak({ store: memoryStore });
+
+app.use(session({
+    secret: 'mySecret',
+    resave: false,
+    saveUninitialized: true,
+}));
+
 app.use(bodyParser.json());
 app.use(cors());
 

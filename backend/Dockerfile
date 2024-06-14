@@ -2,7 +2,7 @@
 FROM node:14
 
 # Create and set the working directory
-WORKDIR /app
+WORKDIR /app/routes
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
@@ -21,4 +21,4 @@ ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
 # Start the backend server
-CMD ["node", "routes/app.js"]
+CMD ["node", "index.js"]

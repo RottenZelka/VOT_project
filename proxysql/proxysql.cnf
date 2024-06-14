@@ -1,0 +1,17 @@
+admin_variables=
+{
+    admin_credentials = 'admin:admin;cluster'
+    mysql_ifaces='0.0.0.0:6032;/var/lib/proxysql/proxysql.sock'
+    refresh_interval=2000
+}
+
+mysql_servers =
+(
+    { address = 'mariadb1'; port = 3306; hostgroup = 10; },
+    { address = 'mariadb2'; port = 3306; hostgroup = 10; },
+)
+
+mysql_query_rules =
+(
+    { rule_id = 1; active = 1; match_pattern = ".*"; destination_hostgroup = 10; },
+)
